@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Before Flight</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        .search-section {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #results {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Remove Before Flight</h1>
+    </header>
+
+    <section class="search-section">
+        <h2>ابحث عن رحلتك</h2>
+        <form id="flightForm">
+            <label for="departure">مدينة المغادرة:</label>
+            <input type="text" id="departure" name="departure" required>
+
+            <label for="destination">مدينة الوصول:</label>
+            <input type="text" id="destination" name="destination" required>
+
+            <label for="departureDate">تاريخ المغادرة:</label>
+            <input type="date" id="departureDate" name="departureDate" required>
+
+            <label for="returnDate">تاريخ العودة:</label>
+            <input type="date" id="returnDate" name="returnDate">
+
+            <label for="passengers">عدد الركاب:</label>
+            <input type="number" id="passengers" name="passengers" min="1" required>
+
+            <button type="submit">بحث عن رحلات</button>
+        </form>
+    </section>
+
+    <section id="results" class="hidden">
+        <h2>الرحلات المتاحة</h2>
+        <ul id="flightResults">
+            <!-- هنا ستظهر الرحلات المتاحة -->
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Remove Before Flight. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        document.getElementById("flightForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let departure = document.getElementById("departure").value;
+            let destination = document.getElementById("destination").value;
+            let departureDate = document.getElementById("departureDate").value;
+            let returnDate = document.getElementById("returnDate").value;
+            let passengers = document.getElementById("passengers").value;
+
+            // التحقق من المدخلات
+            if (!departure || !destination || !departureDate || !passengers) {
+                alert("يرجى ملء جميع الحقول المطلوبة");
+                return;
+            }
+
+            // محاكاة البحث عن الرحلات (يمكنك إضافة API هنا)
+            let results = [
+                { flight: "رحلة 1", departure: departure, destination: destination, date: departureDate, price: 500 },
+                { flight: "رحلة 2", departure: departure, destination: destination, date: departureDate, price: 400 },
+                { flight: "رحلة 3", departure: departure, destination: destination, date: departureDate, price: 450 }
+            ];
+
+            let resultsList = document.getElementById("flightResults");
+            resultsList.innerHTML = '';
+
+            results.forEach(result => {
+                let listItem = document.createElement("li");
+                listItem.innerHTML = `
+                    <strong>${result.flight}</strong><br>
+                    المغادرة: ${result.departure}<br>
+                    الوصول: ${result.destination}<br>
+                    التاريخ: ${result.date}<br>
+                    السعر: ${result.price} USD
+                `;
+                resultsList.appendChild(listItem);
+            });
+
+            document.getElementById("results").classList.remove("hidden");
+        });
+    </script>
+</body>
+</html>
